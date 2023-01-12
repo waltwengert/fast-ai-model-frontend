@@ -1,5 +1,5 @@
 ---
-title: 1. Single file
+title: fast.ai Model
 layout: default
 ---
 
@@ -7,10 +7,12 @@ layout: default
 <div id="results"></div>
 <script>
   async function loaded(reader) {
-    const response = await fetch('https://walt00-hotdog-nothotdog.hf.space/run/predict', {
-      method: "POST", body: JSON.stringify({ "data": [reader.result] }),
-      headers: { "Content-Type": "application/json" }
-    });
+    const response = await fetch("https://walt00-hotdog-nothotdog.hf.space/run/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            data: [reader.result]
+    })})
     const json = await response.json();
     const label = json['data'][0]['confidences'][0]['label'];
     results.innerHTML = `<br/><img src="${reader.result}" width="300"> <p>${label}</p>`
